@@ -39,7 +39,7 @@ Build nothing else until this works reliably.
 - SwiftData for local storage; videos stored as files and referenced from sessions
 - Swift Testing for unit tests; no UI test target (the user tests screens by hand)
 - Apple's swift-format
-- Target: iPhone. Camera features need a physical device; the simulator has no camera.
+- Target: iPhone and iPad (the Xcode project supports both). The app is designed phone-first; iPad gets a working layout, not a separate design. Camera features need a physical device; the simulator has no camera.
 
 ### Labeling tool
 
