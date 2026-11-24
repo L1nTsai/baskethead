@@ -1,0 +1,24 @@
+# macOS
+.DS_Store
+
+# Installers / large local files
+*.dmg
+
+# Xcode build output and per-user state
+build/
+DerivedData/
+*.xcuserstate
+xcuserdata/
+*.xcresult
+
+# Swift Package Manager
+.build/
+.swiftpm/
+
+# ML data: datasets, raw video and training output stay on the Mac, never in git
+ml/data/
+ml/datasets/
+ml/raw/
+*.mp4
+*.mov
+*.m4v
