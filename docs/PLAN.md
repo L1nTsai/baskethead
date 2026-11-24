@@ -220,7 +220,7 @@ Claude checks in with you before starting each feature. Each feature goes on its
 2. Your Xcode and macOS versions
 3. Bundle ID (the app name is decided: Baskethead)
 4. Your GitHub username and the repo name
-5. Where this plan lives in the repo, and its final file name (written as `PLAN.md` for now)
+5. ~~Where this plan lives in the repo~~ Decided: `docs/PLAN.md`
 6. The Xcode project options proposed in Phase 0
 
 **Decided by testing:**

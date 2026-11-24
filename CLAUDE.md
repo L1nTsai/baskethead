@@ -6,7 +6,7 @@ A native iOS app that helps a player improve shooting, ball handling and defense
 
 It's a personal project meant to show strong engineering on a software engineering resume, so prioritize clean architecture, tests, and getting it into real users' hands through TestFlight.
 
-The full plan, decisions and open items are in `PLAN.md` (its final location in the repo is still open). If something isn't decided here or in `PLAN.md`, ask; don't assume.
+The full plan, decisions and open items are in `docs/PLAN.md`. If something isn't decided here or in `docs/PLAN.md`, ask; don't assume.
 
 ## Current milestone (MVP)
 
@@ -69,7 +69,7 @@ Build nothing else until this works reliably.
 ```
 /
 ├── CLAUDE.md
-├── PLAN.md               (final location open)
+├── docs/PLAN.md          The full plan
 ├── .github/workflows/    CI: build and unit tests
 ├── ios/                  Xcode project (created in Xcode, not generated):
 │                         iOS app + LabelTool macOS target
