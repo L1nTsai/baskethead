@@ -1,4 +1,4 @@
-name: CI
+name: CI (lint only)
 
 on:
   push:
@@ -11,7 +11,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build-and-test:
+  lint:
     runs-on: macos-latest
     timeout-minutes: 30
     steps:
@@ -19,33 +19,16 @@ jobs:
 
       - name: Show toolchain versions
         run: |
-          ls -d /Applications/Xcode*
           xcodebuild -version
           xcrun swift-format --version
 
       - name: Lint (swift-format)
         run: xcrun swift-format lint --strict --recursive ios
 
-      - name: Pick an iPhone simulator
-        id: sim
-        run: |
-          # Use whatever iPhone simulator the runner has, so the job doesn't break
-          # when GitHub updates the runner image.
-          UDID=$(xcrun simctl list devices available iPhone -j \
-            | python3 -c "import json,sys; d=json.load(sys.stdin)['devices']; print(next(x['udid'] for r in sorted(d, reverse=True) for x in d[r] if x['isAvailable']))")
-          echo "udid=$UDID" >> "$GITHUB_OUTPUT"
-
-      - name: Build and test
-        run: |
-          xcodebuild test \
-            -project ios/Baskethead.xcodeproj \
-            -scheme Baskethead \
-            -destination "platform=iOS Simulator,id=${{ steps.sim.outputs.udid }}" \
-            -resultBundlePath TestResults.xcresult
-
-      - name: Upload test results
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: TestResults
-          path: TestResults.xcresult
+      # TODO: build and test are off. The project was created with Xcode 27, which saves
+      # project.xcproj. GitHub's runners top out at Xcode 26.6, which cannot open it
+      # ("missing its project.pbxproj file"). Re-enable when runners have Xcode 27:
+      # pick an iPhone simulator, then run
+      #   xcodebuild test -project ios/Baskethead.xcodeproj -scheme Baskethead \
+      #     -destination "platform=iOS Simulator,id=<udid>"
+      # Until then, run the tests locally before every PR.
