@@ -11,22 +11,22 @@
     ],
   },
   "files": [
-    { "kind": "folder", "path": "baskethead", "target-membership": [ "baskethead" ] },
-    { "kind": "folder", "path": "basketheadTests", "target-membership": [ "basketheadTests" ] },
+    { "kind": "folder", "path": "Baskethead", "target-membership": [ "Baskethead" ] },
+    { "kind": "folder", "path": "BasketheadTests", "target-membership": [ "BasketheadTests" ] },
     {
       "kind": "group",
       "name": "Products",
       "children": [
-        { "path": "<PRODUCTS>/baskethead.app", "id": "000000000000000000000120", "type": "wrapper.application", "index": false },
-        { "path": "<PRODUCTS>/basketheadTests.xctest", "id": "943E4CC030B659980053BC2A", "type": "wrapper.cfbundle", "index": false },
+        { "path": "<PRODUCTS>/Baskethead.app", "id": "000000000000000000000120", "type": "wrapper.application", "index": false },
+        { "path": "<PRODUCTS>/BasketheadTests.xctest", "id": "943E4CC030B659980053BC2A", "type": "wrapper.cfbundle", "index": false },
       ],
     },
   ],
   "targets": [
     {
-      "name": "baskethead",
+      "name": "Baskethead",
       "id": "000000000000000100000000",
-      "product": "Products/baskethead.app",
+      "product": "Products/Baskethead.app",
       "product-type": "application",
       "build-phases": [
         "compile-sources",
@@ -70,13 +70,13 @@
         "TARGETED_DEVICE_FAMILY": "1,2",
       },
     }, {
-      "name": "basketheadTests",
+      "name": "BasketheadTests",
       "id": "943E4CBF30B659980053BC2A",
-      "product": "Products/basketheadTests.xctest",
+      "product": "Products/BasketheadTests.xctest",
       "product-type": "bundle.unit-test",
-      "test-host-target": "baskethead",
+      "test-host-target": "Baskethead",
       "dependencies": [
-        "baskethead",
+        "Baskethead",
       ],
       "build-phases": [
         "compile-sources",
@@ -98,7 +98,7 @@
         "SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY": "YES",
         "SWIFT_VERSION": "5.0",
         "TARGETED_DEVICE_FAMILY": "1,2",
-        "TEST_HOST": "$(BUILT_PRODUCTS_DIR)/baskethead.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/baskethead",
+        "TEST_HOST": "$(BUILT_PRODUCTS_DIR)/Baskethead.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Baskethead",
         "VALIDATE_PRODUCT[config=Release]": "YES",
       },
     },
