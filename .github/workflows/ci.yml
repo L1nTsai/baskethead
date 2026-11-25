@@ -19,6 +19,7 @@ jobs:
 
       - name: Show toolchain versions
         run: |
+          ls -d /Applications/Xcode*
           xcodebuild -version
           xcrun swift-format --version
 
