@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# Cancel an older run on the same branch when a new commit arrives.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-test:
+    runs-on: macos-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Show toolchain versions
+        run: |
+          xcodebuild -version
+          xcrun swift-format --version
+
+      - name: Lint (swift-format)
+        run: xcrun swift-format lint --strict --recursive ios
+
+      - name: Pick an iPhone simulator
+        id: sim
+        run: |
+          # Use whatever iPhone simulator the runner has, so the job doesn't break
+          # when GitHub updates the runner image.
+          UDID=$(xcrun simctl list devices available iPhone -j \
+            | python3 -c "import json,sys; d=json.load(sys.stdin)['devices']; print(next(x['udid'] for r in sorted(d, reverse=True) for x in d[r] if x['isAvailable']))")
+          echo "udid=$UDID" >> "$GITHUB_OUTPUT"
+
+      - name: Build and test
+        run: |
+          xcodebuild test \
+            -project ios/Baskethead.xcodeproj \
+            -scheme Baskethead \
+            -destination "platform=iOS Simulator,id=${{ steps.sim.outputs.udid }}" \
+            -resultBundlePath TestResults.xcresult
+
+      - name: Upload test results
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: TestResults
+          path: TestResults.xcresult
